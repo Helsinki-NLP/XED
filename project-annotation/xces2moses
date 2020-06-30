@@ -1,0 +1,241 @@
+#!/usr/bin/perl
+#-*-perl-*-
+#
+# Copyright (C) 2004 Jörg Tiedemann  <joerg@stp.ling.uu.se>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+#
+
+
+use strict;
+use FindBin qw($Bin);
+
+use Encode;
+use HTML::Entities;
+
+my $srclang='src';
+my $trglang='trg';
+my $dir='xml';
+my $max=undef;
+my $opt_p=undef;
+my $opt_P=undef;
+
+my $max=0;
+while ($ARGV[0]=~/^\-/){
+    my $o=shift(@ARGV);
+    if ($o=~/^\-s/){$srclang=shift @ARGV;}
+    if ($o=~/^\-t/){$trglang=shift @ARGV;}
+    if ($o=~/^\-d/){$dir=shift @ARGV;}
+    if ($o=~/^\-m/){$max=shift @ARGV;}
+    if ($o=~/^\-m/){$max=shift @ARGV;}
+    if ($o=~/^\-p/){$opt_p=shift @ARGV;}   # store file names and sentence IDs
+    if ($o=~/^\-P/){$opt_P=shift @ARGV;}   # the same but different format
+}
+
+my $ALIGN   = shift(@ARGV);
+my $OUTBASE = shift(@ARGV) || 'corpus';
+
+# output files (plain text, Moses format)
+
+open S,">$OUTBASE.$srclang" || die "cannot open '$OUTBASE.$srclang'\n";
+open T,">$OUTBASE.$trglang" || die "cannot open '$OUTBASE.$trglang'\n";
+
+binmode(S, ":utf8");
+binmode(T, ":utf8");
+
+
+my $srcdoc='';
+my $trgdoc='';
+
+
+if ((not -e "$ALIGN") and (-e "$ALIGN.gz")){$ALIGN="$ALIGN.gz";}
+if (not -e $ALIGN){die "Alignment file $ALIGN does not exist!\n";}
+
+if ($ALIGN=~/\.gz/){
+    open F,"gzip -cd <$ALIGN |";
+}
+else{
+    open F,"<$ALIGN";
+}
+if ($opt_p){
+    open P,">$opt_p" || warn "cannot open $opt_p ...\n";
+}
+if ($opt_P){
+    open P2,">$opt_P" || warn "cannot open $opt_P ...\n";
+}
+
+
+
+my ($org_srcdoc,$org_trgdoc);
+
+my $count=0;
+while (<F>){
+    if (/fromDoc=\"([^\"]+)\"/){
+	if ($srcdoc ne $1){
+	    $srcdoc=$1;
+	    $org_srcdoc=$srcdoc;
+	    if ((not -e $srcdoc) and (-e "$srcdoc.gz")){
+		$srcdoc="$srcdoc.gz";
+	    }
+	    elsif ((not -e $srcdoc) and (-e "$dir/$srcdoc")){
+		$srcdoc="$dir/$srcdoc";
+	    }
+	    elsif ((not -e $srcdoc) and (-e "$dir/$srcdoc.gz")){
+		$srcdoc="$dir/$srcdoc.gz";
+	    }
+	    if ($srcdoc=~/\.gz$/){
+		open SRC,"gzip -cd <$srcdoc |";
+	    }
+	    else{
+		open SRC,"<$srcdoc";
+	    }
+	    binmode(SRC, ":utf8");
+	}
+    }
+    if (/toDoc=\"([^\"]+)\"/){
+	if ($trgdoc ne $1){
+	    $trgdoc=$1;
+	    $org_trgdoc=$trgdoc;
+	    if ((not -e $trgdoc) and (-e "$trgdoc.gz")){
+		$trgdoc="$trgdoc.gz";
+	    }
+	    elsif ((not -e $trgdoc) and (-e "$dir/$trgdoc")){
+		$trgdoc="$dir/$trgdoc";
+	    }
+	    elsif ((not -e $trgdoc) and (-e "$dir/$trgdoc.gz")){
+		$trgdoc="$dir/$trgdoc.gz";
+	    }
+	    if ($trgdoc=~/\.gz$/){
+		open TRG,"gzip -cd <$trgdoc |";
+	    }
+	    else{
+		open TRG,"<$trgdoc";
+	    }
+	    binmode(TRG, ":utf8");
+	    if ($opt_p){
+		print P "## $org_srcdoc\t$org_trgdoc\n";
+	    }
+	}
+    }
+
+    if (/xtargets=\"([^\"]*)\s*\;\s*([^\"]*)\"/){
+	my $srceof=1;
+	my $trgeof=1;
+	$count++;
+	if ($max and ($count>$max)){last;}
+	my $src=$1;
+	my $trg=$2;
+	my @srcsent=split(/\s/,$src);
+	my @trgsent=split(/\s/,$trg);
+
+	next if (not @srcsent);    # skip empty alignments
+	next if (not @trgsent);
+
+	my $srctxt='';
+	my $trgtxt='';
+
+	local $/='</s>';
+	foreach my $id (@srcsent){
+	    while (my $sent=<SRC>){
+		$srceof=0;
+		if ($sent=~/s [^\>]*id="$id"/s){
+		    &xml2txt($sent);
+		    $srctxt.=$sent.' ';
+		    last;
+		}
+		$srceof=1;
+	    }
+	}
+
+	foreach my $id (@trgsent){
+	    while (my $sent=<TRG>){
+		$trgeof=0;
+		if ($sent=~/s [^\>]*id="$id"/s){
+		    &xml2txt($sent);
+		    $trgtxt.=$sent.' ';
+		    last;
+		}
+		$trgeof=1;
+	    }
+	}
+
+	$srctxt=~s/\s\s+/ /;
+	$trgtxt=~s/\s\s+/ /;
+
+	$srctxt=~s/\s+$//;
+	$trgtxt=~s/\s+$//;
+
+	if ($srctxt=~/\S/){
+	    if ($trgtxt=~/\S/){
+		print S $srctxt;
+		print S "\n";
+		print T $trgtxt;
+		print T "\n";
+		
+		print P "$src\t$trg\n" if ($opt_p);
+		print P2 "$org_srcdoc\t$org_trgdoc\t$src\t$trg\n" if ($opt_P);
+	    }
+	}
+
+        if ($trgeof){
+            close TRG;
+            if ($trgdoc=~/\.gz$/){open TRG,"gzip -cd <$trgdoc |";}
+            else{open TRG,"<$trgdoc";}
+        }
+        if ($srceof){
+            close SRC;
+            if ($srcdoc=~/\.gz$/){open SRC,"gzip -cd <$srcdoc |";}
+            else{open SRC,"<$srcdoc";}
+        }
+    }
+}
+
+close F;
+close S;
+close T;
+
+close P if ($opt_p);
+close P2 if ($opt_P);
+
+
+# simplistic conversion from XML to plain text
+# also: replace newlines, tabs, '|'
+
+sub xml2txt{
+    $_[0]=~s/^.*<s [^\>]*>//s;
+    $_[0]=~s/\n/ /gs;
+    $_[0]=~s/\<[^\>]*>//gs;
+    $_[0]=~s/\s\s+/ /gs;
+
+    ## remove some more special characters and symbols
+    $_[0]=~s/[\x00-\x1f\x7f\n]//g;
+    $_[0]=~s/\<(s|unk|\/s| *and *|)\>//g;
+    $_[0]=~s/\[ *and *\]//g;
+
+    $_[0]=~s/\|/_BAR_/gs;
+
+    # a more general way of decoding XML entities
+    $_[0] = decode_utf8(decode_entities($_[0]));
+
+    # $_[0]=~s/\&gt;/>/gs;
+    # $_[0]=~s/\&lt;/</gs;
+    # $_[0]=~s/\&amp;/&/gs;
+    # $_[0]=~s/\&quot;/"/gs;
+    # $_[0]=~s/\&apos;/'/gs;
+
+    $_[0]=~s/^\s+//;
+}
+
