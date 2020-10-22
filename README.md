@@ -7,7 +7,7 @@ You can read more about it in the following paper:
 
 **Öhman, E., Pàmies, M., Kajava, K. and Tiedemann, J., 2020. XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection. In Proceedings of the 28th International Conference on Compputational Linguistics (COLING 2020).**
 
-Please cite the paper if you use the dataset.
+Please cite this paper if you use the dataset.
 
 Some preliminary and related work has also been discussed in the following papers:
 
