@@ -9,6 +9,8 @@ sentence1\tlabel1,label2
 sentence2\tlabel2,label3,label4...
 ```
 Metadata can be found in the metadata file and the projection "pairs" files.
+NB! The number of annotated subtitle lines are the same as in the original paper. The original paper gives the number of annotations, not lines with annotations.
+Coompatible augmentation data by expert annotators can be found for a selection of languages in [https://github.com/Helsinki-NLP/sentimentator](https://github.com/Helsinki-NLP/sentimentator).
 
 ## Publications
 You can read more about it in the following paper:
