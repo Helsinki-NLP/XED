@@ -1,6 +1,6 @@
 # XED
 This is the XED dataset. 
-The dataset consists of emotion annotated movie subtitles. The original annotations have been sourced for mainly English and Finnish, with the rest created using annotation projection to aligned subtitles in 41 additional languages. The dataset is an ongoing project with forthcoming additions such as machine translated datasets. Please report any errors you find!
+The dataset consists of emotion annotated movie subtitles. The original annotations have been sourced for mainly English and Finnish, with the rest created using annotation projection to aligned subtitles in 41 additional languages. The dataset is an ongoing project with forthcoming additions such as machine translated datasets. **Please let us know if you find any errors or come across other issues with the datasets!**
 
 ## Format
 The files are formatted as follows:
