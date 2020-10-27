@@ -8,16 +8,59 @@ The files are formatted as follows:
 sentence1\tlabel1,label2
 sentence2\tlabel2,label3,label4...
 ```
-Metadata can be found in the metadata file and the projection "pairs" files. Access to detailed metadata can be found on the [http://opus.nlpl.eu/OpenSubtitles-v2018.php](OPUS website). We recommend the use of [https://github.com/Helsinki-NLP/OpusTools](OPUS Tools).
+Metadata can be found in the metadata file and the projection "pairs" files. Access to detailed metadata can be found on the [OPUS website](http://opus.nlpl.eu/OpenSubtitles-v2018.php). We recommend the use of [OPUS Tools](https://github.com/Helsinki-NLP/OpusTools).
 Coompatible augmentation data by expert annotators can be found for a selection of languages in the following repos:
 * [https://github.com/Helsinki-NLP/sentimentator](https://github.com/Helsinki-NLP/sentimentator)
 * [https://github.com/cynarr/MA-thesis](https://github.com/cynarr/MA-thesis)
+
 NB! The number of annotated subtitle lines are the same as listed in the original paper. The original paper gives the number of annotations, not lines with annotations which is the format of the files here. 
+## Evaluations
+We used BERT to test the robustness of the annotations.
+
+### English annotated data
+| Number of annotations:        | 24164 + 9384 neutral |
+|-------------------------------|---------------------:|
+| Number of unique data points: | 17530 + 6420 neutral |
+| Number of emotions:           |   8 (+pos, neg, neu) |
+| Number of annotators:         |      108 (63 active) |
+
+
+| data                                   | f1    | accuracy            |
+|----------------------------------------|-------|---------------------|
+| English without NER, BERT              | 0.530 | 0.538               |
+| English with NER, BERT                 | 0.536 | 0.544               |
+| English NER with neutral, BERT         | 0.467 | 0.529               |
+| English NER binary with surprise, BERT | 0.679 | 0.765               |
+| English NER true binary, BERT          | 0.838 | 0.840               |
+| English NER, one-vs-rest Linear SVC    | 0.502 | 0.650-0.789 / class |
+
+### Multilingual projections
+
+And for a selection of other languages using language-specific BERT models:
+
+| data              | f1     | accuracy |
+|-------------------|--------|----------|
+| Finnish projected | 0.4461 | 0.4542   |
+| Turkish projected | 0.4685 | 0.5257   |
+| Arabic projected  | 0.4627 | 0.5339   |
+| German projected  | 0.5084 | 0.5737   |
+| Dutch projected   | 0.5155 | 0.5822   |
+| Chinese projected | 0.4729 | 0.5247   |
+
+There is some data for 43 langauges, and for 13 languages we have more than 10k projected lines (including Finnish and English).
 
 ## Publications
 You can read more about it in the following paper:
 
 **Öhman, E., Pàmies, M., Kajava, K. and Tiedemann, J., 2020. XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection. In Proceedings of the 28th International Conference on Compputational Linguistics (COLING 2020).**
+```
+@inproceedings{ohman2020xed,
+  title={XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection},
+  author={{\"O}hman, Emily and P{\`a}mies, Marc and Kajava, Kaisla and Tiedemann, J{\"o}rg},
+  booktitle={The 28th International Conference on Computational Linguistics (COLING 2020)},
+  year={2020}
+}
+```
 
 Please cite this paper if you use the dataset.
 
