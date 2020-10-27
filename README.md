@@ -8,11 +8,11 @@ The files are formatted as follows:
 sentence1\tlabel1,label2
 sentence2\tlabel2,label3,label4...
 ```
-Metadata can be found in the metadata file and the projection "pairs" files.
-NB! The number of annotated subtitle lines are the same as listed in the original paper. The original paper gives the number of annotations, not lines with annotations which is the format of the files here. Access to detailed metadata can be found on the [http://opus.nlpl.eu/OpenSubtitles-v2018.php](Opus website). We recommend the use of [OPUS Tools](https://github.com/Helsinki-NLP/OpusTools).
+Metadata can be found in the metadata file and the projection "pairs" files. Access to detailed metadata can be found on the [http://opus.nlpl.eu/OpenSubtitles-v2018.php](OPUS website). We recommend the use of [https://github.com/Helsinki-NLP/OpusTools](OPUS Tools).
 Coompatible augmentation data by expert annotators can be found for a selection of languages in the following repos:
 * [https://github.com/Helsinki-NLP/sentimentator](https://github.com/Helsinki-NLP/sentimentator)
 * [https://github.com/cynarr/MA-thesis](https://github.com/cynarr/MA-thesis)
+NB! The number of annotated subtitle lines are the same as listed in the original paper. The original paper gives the number of annotations, not lines with annotations which is the format of the files here. 
 
 ## Publications
 You can read more about it in the following paper:
