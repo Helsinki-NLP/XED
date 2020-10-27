@@ -52,7 +52,7 @@ There is some data for 43 langauges, and for 13 languages we have more than 10k 
 ## Publications
 You can read more about it in the following paper:
 
-**Öhman, E., Pàmies, M., Kajava, K. and Tiedemann, J., 2020. XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection. In Proceedings of the 28th International Conference on Compputational Linguistics (COLING 2020).**
+**Öhman, E., Pàmies, M., Kajava, K. and Tiedemann, J., 2020. XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection. In Proceedings of the 28th International Conference on Computational Linguistics (COLING 2020).**
 ```
 @inproceedings{ohman2020xed,
   title={XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection},
