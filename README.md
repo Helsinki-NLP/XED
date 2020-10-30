@@ -96,3 +96,5 @@ Some preliminary and related work has also been discussed in the following paper
 
 
 If you publish something using our dataset, feel free to contact us and we can add a link to your publication in this repo.
+
+License: Creative Commons Attribution 4.0 International License (CC-BY)
