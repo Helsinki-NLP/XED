@@ -8,6 +8,8 @@ The files are formatted as follows:
 sentence1\tlabel1,label2
 sentence2\tlabel2,label3,label4...
 ```
+Where the number indicates the emotion in ascending alphabetical order: anger:1, anticipation:2, disgust:3, fear:4, joy:5, sadness:6, surprise:7, trust:8, with neutral:0 where applicable. Note that if you use our BERT code, it will re-arrange the original labels when you use 1-8 into 0-7 by switching trust:8->0
+
 Metadata can be found in the metadata file and the projection "pairs" files. Access to detailed metadata can be found on the [OPUS website](http://opus.nlpl.eu/OpenSubtitles-v2018.php). We recommend the use of [OPUS Tools](https://github.com/Helsinki-NLP/OpusTools).
 Coompatible augmentation data by expert annotators can be found for a selection of languages in the following repos:
 * [https://github.com/Helsinki-NLP/sentimentator](https://github.com/Helsinki-NLP/sentimentator)
