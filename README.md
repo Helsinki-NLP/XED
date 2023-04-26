@@ -11,13 +11,13 @@ sentence2\tlabel2,label3,label4...
 Where the number indicates the emotion in ascending alphabetical order: anger:1, anticipation:2, disgust:3, fear:4, joy:5, sadness:6, surprise:7, trust:8, with neutral:0 where applicable. Note that if you use our BERT code, it will re-arrange the original labels when you use 1-8 into 0-7 by switching trust:8->0
 
 Metadata can be found in the metadata file and the projection "pairs" files. Access to detailed metadata can be found on the [OPUS website](http://opus.nlpl.eu/OpenSubtitles-v2018.php). We recommend the use of [OPUS Tools](https://github.com/Helsinki-NLP/OpusTools).
-Coompatible augmentation data by expert annotators can be found for a selection of languages in the following repos:
+Compatible augmentation data by expert annotators can be found for a selection of languages in the following repos:
 * [https://github.com/Helsinki-NLP/sentimentator](https://github.com/Helsinki-NLP/sentimentator)
 * [https://github.com/cynarr/MA-thesis](https://github.com/cynarr/MA-thesis)
 
 NB! The number of annotated subtitle lines are the same as listed in the original paper. The original paper gives the number of annotations, not lines with annotations which is the format of the files here. 
 ## Evaluations
-We used BERT to test the robustness of the annotations.
+We used BERT to test the annotations for Finnish, English, and a handful of other languages with complete BERT models.
 
 ### English annotated data
 | Number of annotations:        | 24164 + 9384 neutral |
@@ -97,6 +97,6 @@ Some preliminary and related work has also been discussed in the following paper
 * Öhman, E., 2020. Challenges in Annotation: Annotator Experiences from a Crowdsourced Emotion Annotation Task. In Digital Humanities in the Nordic Countries 2020. CEUR Workshop Proceedings.
 
 
-If you publish something using our dataset, feel free to contact us and we can add a link to your publication in this repo.
+If you publish something using our dataset, we would be happy to add a link to your publication in this repo.
 
 License: Creative Commons Attribution 4.0 International License (CC-BY)
