@@ -2,6 +2,30 @@
 This is the XED dataset. 
 The dataset consists of emotion annotated movie subtitles from OPUS. We use Plutchik's 8 core emotions to annotate. The data is multilabel. The original annotations have been sourced for mainly English and Finnish, with the rest created using annotation projection to aligned subtitles in 41 additional languages, with 31 languages included in the final dataset (more than 950 lines of annotated subtitle lines). The dataset is an ongoing project with forthcoming additions such as machine translated datasets. **Please let us know if you find any errors or come across other issues with the datasets!**
 
+## Publications
+You can read more about it in the following paper:
+
+**Öhman, E., Pàmies, M., Kajava, K. and Tiedemann, J., 2020. XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection. In Proceedings of the 28th International Conference on Computational Linguistics (COLING 2020).**
+```
+@inproceedings{ohman2020xed,
+  title={XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection},
+  author={{\"O}hman, Emily and P{\`a}mies, Marc and Kajava, Kaisla and Tiedemann, J{\"o}rg},
+  booktitle={The 28th International Conference on Computational Linguistics (COLING 2020)},
+  year={2020}
+}
+```
+
+Please cite this paper if you use the dataset.
+
+Some preliminary and related work has also been discussed in the following papers:
+
+* Öhman, E., Kajava, K., Tiedemann, J. and Honkela, T., 2018, October. Creating a dataset for multilingual fine-grained emotion-detection using gamification-based annotation. In Proceedings of the 9th Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis (pp. 24-30).
+* Öhman, E.S. and Kajava, K.S., 2018. Sentimentator: Gamifying fine-grained sentiment annotation. Digital Humanities in the Nordic Countries 2018.
+* Kajava, K.S., Öhman, E.S., Hui, P. and Tiedemann, J., 2020. Emotion Preservation in Translation: Evaluating Datasets for Annotation Projection. In Digital Humanities in the Nordic Countries 2020. CEUR Workshop Proceedings.
+* Öhman, E., 2020. Challenges in Annotation: Annotator Experiences from a Crowdsourced Emotion Annotation Task. In Digital Humanities in the Nordic Countries 2020. CEUR Workshop Proceedings.
+
+License: Creative Commons Attribution 4.0 International License (CC-BY)
+
 ## Format
 The files are formatted as follows:
 ```
@@ -74,29 +98,4 @@ And for the other languages with more than 950 lines using SVM:
 | TR   | 9202  | 35.95   | 2423  | 2243     | 1212    | 1339 | 1610 | 1469    | 1589     | 1628  | 63.64  | 28.03%  | 6.71%   | 1.63%    | 0.608  |
 | VI   | 956   | 34.53   | 245   | 224      | 128     | 141  | 187  | 150     | 144      | 178   | 63.28  | 28.56%  | 7.11%   | 1.05%    | 0.5594 |
 
-## Publications
-You can read more about it in the following paper:
 
-**Öhman, E., Pàmies, M., Kajava, K. and Tiedemann, J., 2020. XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection. In Proceedings of the 28th International Conference on Computational Linguistics (COLING 2020).**
-```
-@inproceedings{ohman2020xed,
-  title={XED: A Multilingual Dataset for Sentiment Analysis and Emotion Detection},
-  author={{\"O}hman, Emily and P{\`a}mies, Marc and Kajava, Kaisla and Tiedemann, J{\"o}rg},
-  booktitle={The 28th International Conference on Computational Linguistics (COLING 2020)},
-  year={2020}
-}
-```
-
-Please cite this paper if you use the dataset.
-
-Some preliminary and related work has also been discussed in the following papers:
-
-* Öhman, E., Kajava, K., Tiedemann, J. and Honkela, T., 2018, October. Creating a dataset for multilingual fine-grained emotion-detection using gamification-based annotation. In Proceedings of the 9th Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis (pp. 24-30).
-* Öhman, E.S. and Kajava, K.S., 2018. Sentimentator: Gamifying fine-grained sentiment annotation. Digital Humanities in the Nordic Countries 2018.
-* Kajava, K.S., Öhman, E.S., Hui, P. and Tiedemann, J., 2020. Emotion Preservation in Translation: Evaluating Datasets for Annotation Projection. In Digital Humanities in the Nordic Countries 2020. CEUR Workshop Proceedings.
-* Öhman, E., 2020. Challenges in Annotation: Annotator Experiences from a Crowdsourced Emotion Annotation Task. In Digital Humanities in the Nordic Countries 2020. CEUR Workshop Proceedings.
-
-
-If you publish something using our dataset, we would be happy to add a link to your publication in this repo.
-
-License: Creative Commons Attribution 4.0 International License (CC-BY)
